@@ -1,0 +1,19 @@
+<launch>
+ 
+  <!--  ************** Minimal Launch ***************  -->
+  <include file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+
+  <!--  ************** 3d sensor ***************  -->
+  <include file="$(find turtlebot_bringup)/launch/3dsensor.launch"/>
+
+
+  <!--  ****** Maps *****  -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find turtlebot_navigation)/maps/real_world_environment.yaml"/>
+
+
+  <include file="$(find turtlebot_navigation)/launch/includes/amcl/amcl.launch.xml"/>
+
+
+ <!--  ************** Navigation  ***************  -->
+  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
+</launch>
