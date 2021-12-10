@@ -36,75 +36,65 @@ int main(int argc, char** argv) {
 	ros::NodeHandle n;
 	sound_play::SoundClient sc;
 	ros::spinOnce();
-	path_to_sounds = "/home/roy0005/catkin_ws/src/final_project/turtlebot_sounds/";
+	path_to_sounds = "/home/roy0005/catkin_ws/src/final_project/turtlebot_sounds/"; //where the sound files are located
 
 	char user_choice = 'q';
 	do {
+		//receiving input from user 
 		user_choice = chooseLocations();
+
 		if (user_choice == 'f') {
-			
-			/* move to node 1 first*/
+			//visits first node
 			goalReached = moveToGoal(x_1, y_1);
 
-			if (goalReached)  {
-			ROS_INFO("Hooray, the TurtleBot has reached the goal!");	
-				
+			//first node reached
+			if (goalReached) {
+				ROS_INFO("Hooray, the TurtleBot has reached the first goal!");
+				ros::spinOnce();
+				sc.playWave(path_to_sounds + "src_sounds_PhoneBellRingingSound.wav");
+				goalReached = false;
 			}
-		}
 
-
-		else if (user_choice == '2') {
-			/*
-			goalReached = moveToGoal(x_1, y_1)
-			if (move
-			*/
+			//visits second node
 			goalReached = moveToGoal(x_2, y_2);
-		}
-		else if (user_choice == '3') {
+
+			//second node reached
+			if (goalReached) {
+				ROS_INFO("A step closer, the TurtleBot has reached the second goal!");
+				ros::spinOnce();
+				sc.playWave(path_to_sounds + "src_sounds_ring.wav");
+				goalReached = false;
+			}
+
+			//visits third node
 			goalReached = moveToGoal(x_3, y_3);
-		}
-		else if (user_choice == 'f') {
+
+			//third node reached
+			if (goalReached) {
+				ROS_INFO("Almost there, the TurtleBot has reached the third goal!");
+				ros::spinOnce();
+				sc.playWave(path_to_sounds + "src_sounds_Ringing_Phone.wav");
+				goalReached = false;
+			}
+
+			//visits the target destination
 			goalReached = moveToGoal(x_target, y_target);
-		}
-		if (user_choice != 'q') {
 
 			if (goalReached) {
-
-				ROS_INFO("Hooray, the TurtleBot has reached the goal!");
-
+				ROS_INFO("Congratulations, the TurtleBot has reached the requested target destination!");
 				ros::spinOnce();
-
-				//user chose location 1, play PhoneBellRingingSound.wav sound
-				if (user_choice == '1') {
-					sc.playWave(path_to_sounds + "src_sounds_PhoneBellRingingSound.wav");
-				}
-
-				//user chose location 2, play ring.wav sound
-				if (user_choice == '2') {
-					sc.playWave(path_to_sounds + "src_sounds_ring.wav");
-				}
-
-				//user chose location 3, play Ringing_Phone.wav sound
-				if (user_choice == '3') {
-					sc.playWave(path_to_sounds + "src_sounds_Ringing_Phone.wav");
-				}
-
-				//user chose the final location, play ship_bell.wav sound
-				if (user_choice == 'f') {
-					sc.playWave(path_to_sounds + "src_sounds_ship_bell.wav");
-				}
-
-				ros::spinOnce();
+				sc.playWave(path_to_sounds + "src_sounds_ship_bell.wav");
+				goalReached = true;
 			}
 
-			else {
-
-				ROS_INFO("We're sorry, the TurtleBot's attempt to reach the specified goal has not been successful");
-
-				//target destination not reached -> play buzzer_x.wav
-				sc.playWave(path_to_sounds + "src_sounds_buzzer_x.wav");
-			}
 		}
+
+		else if (user_choice != 'f' && user_choice != 'q') {
+				ROS_INFO("Warning: user input not recognized!");
+				ros::spinOnce();
+				sc.playWave(path_to_sounds + "src_sounds_buzzer_x.wav");
+		}
+
 	} while (user_choice != 'q');
 
 	return 0;
@@ -156,10 +146,10 @@ char chooseLocations() {
 	char UserChoice = 'q';
 	std::cout << "|-------------------------------|" << std::endl;
 	std::cout << "|PRESSE A KEY:" << std::endl;
-	std::cout << "|'f': Target Destination " << std::endl;
+	std::cout << "|'f': Final " << std::endl;
 	std::cout << "|'q': Quit " << std::endl;
 	std::cout << "|-------------------------------|" << std::endl;
-	std::cout << "|WHERE DO YOU WANT THE TURTLEBOT TO GO?";
+	std::cout << "|PLEASE SELECT 'f' SO THE TURTLEBOT CAN MOVE TO THE REQUESTED TARGET DESTINATION";
 	std::cin >> UserChoice;
 
 	return UserChoice;
