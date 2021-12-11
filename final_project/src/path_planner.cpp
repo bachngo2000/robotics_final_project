@@ -32,7 +32,7 @@ bool goalReached = false;
 
 /* main program*/
 int main(int argc, char** argv) {
-	ros::init(argc, argv, "path_navigation_node");
+	ros::init(argc, argv, "map_navigation_node");
 	ros::NodeHandle n;
 	sound_play::SoundClient sc;
 	ros::spinOnce();
