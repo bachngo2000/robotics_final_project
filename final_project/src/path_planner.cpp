@@ -13,20 +13,20 @@ char chooseLocations();
 /** declare the coordinates (x,y) of interest **/
 
 //first node (location) the TurtleBot visits
-double x_1 = 0.00;
-double y_1 = 0.00;
+double x_1 = -0.505;
+double y_1 = 0.535;
 
 //second node (location) the TurtleBot visits
-double x_2 = 0.00;
-double y_2 = 0.00;
+double x_2 = 0.711;
+double y_2 = -1.312;
 
 //third node (location) the TurtleBot visits
-double x_3 = 0.00;
-double y_3 = 0.00;
+double x_3 = -2.624;
+double y_3 = -0.874;
 
 //final target destination for the TurtleBot 
-double x_target = 35.20;
-double y_target = 13.50;
+double x_target = -2.187;
+double y_target = 0.943;
 
 bool goalReached = false;
 
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
 	ros::NodeHandle n;
 	sound_play::SoundClient sc;
 	ros::spinOnce();
-	path_to_sounds = "/home/roy0005/catkin_ws/src/final_project/turtlebot_sounds/"; //where the sound files are located
+	//path_to_sounds = "/home/roy0005/catkin_ws/src/final_project/turtlebot_sounds/"; //where the sound files are located
 
 	char user_choice = 'q';
 	do {
@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
 			if (goalReached) {
 				ROS_INFO("Hooray, the TurtleBot has reached the first goal!");
 				ros::spinOnce();
-				sc.playWave(path_to_sounds + "src_sounds_PhoneBellRingingSound.wav");
+				//sc.playWave(path_to_sounds + "src_sounds_PhoneBellRingingSound.wav");
 				goalReached = false;
 			}
 
@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
 			if (goalReached) {
 				ROS_INFO("A step closer, the TurtleBot has reached the second goal!");
 				ros::spinOnce();
-				sc.playWave(path_to_sounds + "src_sounds_ring.wav");
+				//sc.playWave(path_to_sounds + "src_sounds_ring.wav");
 				goalReached = false;
 			}
 
@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
 			if (goalReached) {
 				ROS_INFO("Almost there, the TurtleBot has reached the third goal!");
 				ros::spinOnce();
-				sc.playWave(path_to_sounds + "src_sounds_Ringing_Phone.wav");
+				//sc.playWave(path_to_sounds + "src_sounds_Ringing_Phone.wav");
 				goalReached = false;
 			}
 
@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
 			if (goalReached) {
 				ROS_INFO("Congratulations, the TurtleBot has reached the requested target destination!");
 				ros::spinOnce();
-				sc.playWave(path_to_sounds + "src_sounds_ship_bell.wav");
+				//sc.playWave(path_to_sounds + "src_sounds_ship_bell.wav");
 				goalReached = true;
 			}
 
@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
 		else if (user_choice != 'f' && user_choice != 'q') {
 				ROS_INFO("Warning: user input not recognized!");
 				ros::spinOnce();
-				sc.playWave(path_to_sounds + "src_sounds_buzzer_x.wav");
+				//sc.playWave(path_to_sounds + "src_sounds_buzzer_x.wav");
 		}
 
 	} while (user_choice != 'q');
