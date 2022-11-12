@@ -1,2 +1,2 @@
 # robotics_final_project
-Please consult the Final Project Report (Intelligent Robotics) for information on this project.
+Please consult the Intelligent Robotics Final Project Report for information on this project.
